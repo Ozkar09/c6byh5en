@@ -1,4 +1,5 @@
 class Api::V1::ProductsController < ApplicationController
+
   def index
     @products = Product.all
     render json: @products.as_json
@@ -9,7 +10,14 @@ class Api::V1::ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.create(product_params)
+    @product = Product.new(product_params)
+    respond_to do |format|
+      if @product.save
+        format.json { render json: @product, status: :created, location: @product }
+      else
+        format.json { render json: @product.errors.full_messages, status: 422}
+      end
+    end
   end
 
   def edit
