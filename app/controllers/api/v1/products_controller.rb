@@ -27,7 +27,7 @@ class Api::V1::ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
       if @product.update(product_params)
-        render json: @product.to_json, head: 200, nothing: true
+        render json: @product.to_json, status: 200
       else
         render json: @product.errors.full_messages, status: 422
       end
@@ -37,7 +37,7 @@ class Api::V1::ProductsController < ApplicationController
     @product = Product.find(params[:id])
     respond_to do |format|
       if @product.destroy
-        format.json { render json: @product, head: 204, location: @product }
+        format.json { render json: @product, status: 204, location: @product }
       else
         format.json { render json: @product.errors.full_messages, status: 422}
       end
