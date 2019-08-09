@@ -4,7 +4,7 @@ class Api::V1::ProductsController < ApplicationController
     @product = Product.find(params[:id])
     respond_to :json
       if @product.update(product_params)
-        render json: @product.to_json, status: 200
+        render json: @product.to_json, status: 200, location: @product
       else
         #render json: @product.errors.full_messages, status: 422
       end
