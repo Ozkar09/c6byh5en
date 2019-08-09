@@ -1,5 +1,5 @@
 class Api::V1::ProductsController < ApplicationController
-  
+
   def update
     @product = Product.find(params[:id])
     respond_to :json
@@ -8,17 +8,6 @@ class Api::V1::ProductsController < ApplicationController
       else
         render json: @product.errors.full_messages, status: 422
       end
-  end
-
-  def destroy
-    @product = Product.find(params[:id])
-    respond_to do |format|
-      if @product.destroy
-        format.json { render json: @product, status: 204, location: @product }
-      else
-        format.json { render json: @product.errors.full_messages, status: 422}
-      end
-    end
   end
 
   private
