@@ -6,7 +6,7 @@ class Api::V1::ProductsController < ApplicationController
       if @product.update(product_params)
         render json: @product.to_json, status: 200
       else
-        render json: @product.errors.full_messages, status: 422
+        #render json: @product.errors.full_messages, status: 422
       end
   end
 
